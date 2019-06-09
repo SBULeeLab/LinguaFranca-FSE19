@@ -21,7 +21,6 @@ Our artifact includes the following:
 | Regex analyses: Semantic | Drivers for 5 input generators | Section 7.1 | Collects, improves, and unifies existing input generators | |
 | Regex analyses: Performance | Drivers for 3 super-linear regex detectors | Section 7.2 | Extends existing super-linear regex detectors to partial-match semantics | Builds on the tooling from our FSE'18 paper |
 
-TODO I AM HERE.
 
 In addition to this directory's `README.md`, each sub-tree comes with one or more READMEs describing the software and tests.
 
@@ -75,21 +74,21 @@ Use this to confirm that the code is installed and working. Whether you think it
 
 ## Directory structure
 
-| File or Directory/    | Description | Relevance to paper |
-|:---------------------:|:------------|:-------------------------------------------------------------------------------------:|
-| .                     | Introductory content                                      | - |
-| README.md             | You're in it                                              | - |
-| LICENSE               | Terms of software release                                 | - |
-| INSTALL               | "Install instructions"                                    | - |
-| STATUS                | Claims of artifact quality                                | - |
-| data/                 | All unique regexes we extracted from npm and pypi modules | Used to answer RQs 1-4 |
-| vuln-regex-detector/  | Extract regexes from modules and test for vulnerability. (submodule) | answers RQ1 |
-| degree-of-vuln/       | What is the degree of vulnerability of this regex?        | answers RQ2 |
-| semantic-meaning/     | What meaning does this regex appear to capture?           | answers RQ3 |
-| structural-analysis/  | Check whether a regex contains an anti-pattern            | answers RQ4 |
-| visualization/        | Used to produce visualizations. Mostly for posterity.     | - |
-| containerized/        | Dockerfile for building container | - |
-| full-analysis/        | Run each analysis step on a regex.                        | - |
+| File or Directory/    | Description |
+|:---------------------:|:------------|
+| README.md             | You're in it                                              |
+| PAPER.pdf             | Non-anonymized manuscript we submitted for review. Not camera-ready.                                              |
+| LICENSE               | Terms of software release                                 |
+| STATUS                | Claims of artifact quality                                |
+| INSTALL               | "Install instructions"                                    |
+| internet-regexes/                | Corpus for Internet Sources, plus extraction tools                                    |
+| production-regexes/              | Corpus for Production Regexes, plus extraction tools |
+| lib/                             | Python libraries -- utility routines, serializers and parsers for types expressed in JSON
+| test-regex-behavior-in-language/ | Drivers for testing regex behavior in each language
+| semantic/                        | Tools for semantic experiments
+| performance/                     | Tools for performance experiments
+| containerized/                   | Dockerfile for building container | - |
+| full-analysis/                   | Run each analysis step on a regex.                        | - |
 
 Each directory contains its own README for additional details.
 
@@ -112,3 +111,4 @@ This makes it easy to do a line-by-line analysis on the objects in the file, eve
 ## Contact
 
 Contact J.C. Davis at davisjam@vt.edu with any questions.
+
