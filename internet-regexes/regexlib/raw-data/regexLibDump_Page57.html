@@ -1,0 +1,322 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="ctl00_Head1"><title>
+	
+        Regular Expression Library
+    
+</title><meta content="Regular Expression Library provides a searchable database of regular expressions.  Users can add, edit, rate, and test regular expressions." name="description" /><meta content="perl regular expression awk sed grep library regex regx regexlib asp.net asp net dotnet  tutorial example test build find search" name="keywords" />
+    <script type="text/javascript">
+        <!--
+        // Preload the image used in overlibmws popups
+        myExit = new Image();
+        myExit.src = "/Scripts/overlibmws/exit.gif"
+
+        // Always include the width and height for any images)
+        var closeimg =
+          '<img src="/Scripts/overlibmws/exit.gif" alt="Click to Close" '
+         + 'width="12" height="11" border="0">';
+	   
+         // -->
+    </script>
+    <script type="text/javascript" src="/Scripts/overlibmws/overlibmws.js"></script>
+    <script type="text/javascript" src="/Scripts/overlibmws/overlibmws_draggable.js"></script>
+    <script type="text/javascript" src="/Scripts/overlibmws/overlibmws_filter.js"></script>
+    <script type="text/javascript" src="/Scripts/overlibmws/overlibmws_overtwo.js"></script>
+    <script type="text/javascript" src="/Scripts/overlibmws/overlibmws_shadow.js"></script>
+<link href="App_Themes/Green/default.css" type="text/css" rel="stylesheet" /><link href="App_Themes/Green/Form.css" type="text/css" rel="stylesheet" /><link href="App_Themes/Green/Tester.css" type="text/css" rel="stylesheet" /></head>
+<body>
+    <!--[if IE 6]><link href="/ie6styles.css" type="text/css" rel="stylesheet"  /><![endif]-->
+    <div id="overDiv" style="position: absolute; visibility: hidden; z-index: 10000">
+    </div>
+    <div id="backdrop" style="position: absolute; visibility: hidden;">
+    </div>
+    <form name="aspnetForm" method="post" action="./Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=57&amp;AspxAutoDetectCookieSupport=1" id="aspnetForm">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMjYzNjc0ODQyZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAgUjY3RsMDAkTG9naW5WaWV3MSRMb2dpblN0YXR1czEkY3RsMDEFI2N0bDAwJExvZ2luVmlldzEkTG9naW5TdGF0dXMxJGN0bDAzEfwqYjuGUhYMU7LI6tVWVPFLuqlZzzlfD+JuTtRwZmY=" />
+
+
+<script src="/ScriptResource.axd?d=nTb_nGNWFIr2p89D33a8j49ykM-hpqv1nMlk1G2ky_RgG8fdFpgMYJ42_G6CjX1ytStQzhslryglnowuOoX3PqoNtyGX0YjHaniLPzAUNF5_g71_3ic_w0MnxnpU5rK5fbKS0OWBny57yf5-gOU-S_qv4LtFr2HhsksgnsMbAqc1&amp;t=ffffffffb0622999" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BBBC20B8" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdABdmaoXIqepFfnsYt+I64hXlBWceBit8e6/TdPqOU5fZbYzbchASd3StvootSY+QxqjrhNqu/Y+/dTHeevO5hWfoN2ivCUQp263gdXwQ4Hu9jsB/t4IkeRqwC8MuhQW8V29GDq+4Cgg6eyGtddJILiRSEoEAVAE35eSFGYDHeTNv8459+FlwsSVQhZxQTeYhB9AgxV31GvW8FS2CczsecV2mQ3kynCA1X3qntEWp0bLDaD+2MhDrL3v1pZbdybxQaUW+VQRkkjhikog2kRXey+rzNjpdksO7pn7ILR/fR45gbfZCX7CickUzHCsaaakKQG4qozHml/ULRIRDfMBgXfiu3XHxXwo+i8fmGnLob4qas5/HTVUYM2YqihWHwAz9tD40KZYGRuFKZhS9DG3e+3wesa22Hc77Dq2xl6OXVGA1/tRANdxmSWa8W5pXEXH7maZuQFfR2FEWYJeeDXNisl/cjkxbpcxoWPNP2dR2wiSei+qH+oUHYypWlLU3PSkmHZqxHuvOvYKhdUTWs0wm/wtA" />
+    
+    
+    <div id="siteTop">
+        <h1>
+            RegExLib.com - The first Regular Expression Library on the Web!</h1>
+        <div id="topNav" class="commonContainerHeader">
+            <ul>
+                <li><a href="/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Default.aspx"">Home</a></li><li><a href="/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Search.aspx"">Search</a></li><li><a href="/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/RETester.aspx"">Regex Tester</a></li><li><a href="/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/DisplayPatterns.aspx"">Browse Expressions</a></li><li><a href="/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Add.aspx"">Add Regex</a></li>
+    
+
+
+
+                
+                        <li>
+                            <a id="ctl00_LoginView1_LoginStatus1" href="javascript:__doPostBack(&#39;ctl00$LoginView1$LoginStatus1$ctl02&#39;,&#39;&#39;)">Login</a>
+                        </li>
+                    
+            </ul>
+        </div>
+        <div class="commonContainer">
+            <div class="supportSponsors">
+                <p>
+                    Please support RegExLib Sponsors</p>
+            </div>
+            <div id="leaderboardAdTop">
+            <div class="lqm_ad" lqm_publisher="lqm.regexlib.site" lqm_zone="ron" lqm_format="728x90"></div>
+            </div>
+        </div>
+    </div>
+    <div id="siteBody">
+        <div id="sidebarLeft">
+            <div class="commonContainerHeader">
+                <h3>
+                    Subscribe</h3>
+            </div>
+            <div class="commonContainer">
+                <ul class="sidebarList">
+                    <li class="rssLink"><a href='http://feeds.feedburner.com/Regexlibcom-RecentPatterns'>
+                        Recent Expressions</a></li>
+                </ul>
+                <p style="margin-left: 17px;">
+                    <a href="http://feeds.feedburner.com/Regexlibcom-RecentPatterns">
+                        <img src="http://feeds.feedburner.com/~fc/Regexlibcom-RecentPatterns?bg=99CCFF&amp;fg=444444&amp;anim=1"
+                            height="26" width="88" style="border: 0" alt="" /></a></p>
+            </div>
+            
+
+    <div class="commonContainerHeader"><h3>Site Links</h3></div>
+    <div class="commonContainer">
+        <ul class="sidebarList">
+            
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl00_ListItem1" class="starLink"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/CheatSheet.aspx'>Regex Cheat Sheet</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl02_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Search.aspx'>Search</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl03_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/RETester.aspx'>Regex Tester</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl04_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/DisplayPatterns.aspx'>Browse Expressions</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl05_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Add.aspx'>Add Regex</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl06_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/UserPatterns.aspx'>Manage My Expressions</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl07_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Contributors.aspx'>Contributors</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl11_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Resources.aspx'>Regex Resources</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl12_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/WebServices.asmx'>Web Services</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl13_ListItem1"><a href='http://lakequincy.com/advertisers/publisherinfo/regExLib.aspx'>Advertise</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl14_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Contact.aspx'>Contact Us</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl15_ListItem1"><a href='/(X(1)A(pzGF1n0IgUq-EGGqQCfbtm9oELdA30w2KIll9t9-EINXheJ1QXQQnOXQ0WcntzHEoPYupTi6yZCDzycmNJ_1aN2kJCcNWOz3eiIfPREIHAb9Do3S4KL9A9Cdo0vKzYV8ETZNlH5TBnDwDZOnKSGuCVc8ITXYAM1YNh61ni6AMQBxO7J4o0mgOLa0Yy7NpD6R0))/Register.aspx'>Register</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl16_ListItem1" class="rssLink"><a href='http://feeds.feedburner.com/Regexlibcom-RecentPatterns'>Recent Expressions</a></li>
+                
+                    <li id="ctl00_LeftNavigation1_LeftMenu_ctl17_ListItem1" class="rssLink"><a href='http://feeds.feedburner.com/Regexlibcom-RecentComments'>Recent Comments</a></li>
+                
+        </ul>
+    </div>
+
+
+
+            
+
+    <div class="commonContainerHeader"><h3>Community</h3></div>
+    <div class="commonContainer">
+        <ul class="sidebarList">
+            
+                    <li id="ctl00_CommunityNavigation_LeftMenu_ctl08_ListItem1"><a href='http://regexadvice.com/forums/'>Regex Forums</a></li>
+                
+                    <li id="ctl00_CommunityNavigation_LeftMenu_ctl09_ListItem1"><a href='http://regexadvice.com/blogs/'>Regex Blogs</a></li>
+                
+                    <li id="ctl00_CommunityNavigation_LeftMenu_ctl10_ListItem1"><a href='http://aspadvice.com/lists/SignUp/list.aspx?l=68&c=16'>Regex Mailing List</a></li>
+                
+        </ul>
+    </div>
+
+
+
+            
+    <div class="commonContainerHeader"><h3>Top Contributors</h3></div>
+    <div class="commonContainer">
+        <ul class="sidebarList">
+            
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=8a71bef2-8e15-421e-b9da-b2af49627e73'>Cristiano Ronaldo (430)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=b6141b2b-63f0-4620-83aa-0d75a83ba9e0'>tomcruse (124)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=2a0cf450-eed0-4089-a517-b6c591582060'>jonsondevid (101)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=2e56d3e9-a286-4051-a0c7-217b5736f1d3'>jack thomas (98)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=7bf65759-813e-4cb1-925b-81b028de56a9'>davidwarner (62)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=a31a0874-118f-4550-933e-a7c575d149ae'>Michael Ash (55)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=26c277f9-61b2-4bf5-bb70-106880138842'>Steven Smith (42)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=ba1dfaaf-4b49-4fdd-8aac-d2c99cb4eab1'>Devid Watson (38)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=297a9688-14e2-4390-9986-be1ec0c2bff1'>crishbone1475 (35)</a>
+                    </li>
+                
+                    <li>
+                        <a href='UserPatterns.aspx?authorId=26e297bc-c2ee-4c1c-a148-e28d3206d166'>laraben (35)</a>
+                    </li>
+                
+                
+            <li style="margin-top: 12px; font-weight: bold;"><a id="ctl00_ucTopContributors_contributorslink" href="Contributors.aspx">All Contributors</a></li>
+        </ul>
+    </div>
+
+            <div class="commonContainerHeader">
+                <h3>
+                    Advertise with us</h3>
+            </div>
+        </div>
+        <div id="sidebarRight">
+            <div class="commonContainerHeader">
+                <h3>
+                    Sponsors</h3>
+            </div>
+            <div class="commonContainer paddingNoneSides center">
+                <div class="lqm_ad" lqm_publisher="lqm.regexlib.site" lqm_zone="ron" lqm_format="1x2"></div>
+            </div>
+            <div class="commonContainer paddingNoneSides center">
+                <div class="lqm_ad" lqm_publisher="lqm.regexlib.site" lqm_zone="ron" lqm_format="160x600"></div>
+            </div>
+        </div>
+        <div id="mainContentArea">
+            
+
+    <div class="commonContainerHeader">
+        <h2>Advanced Search </h2>
+    </div>
+    <div class="commonContainer advancedSearchContainer">
+        <div class="searchCriteria">
+            Keywords<br />
+            <input name="ctl00$ContentPlaceHolder1$txtKeywords" type="text" id="ctl00_ContentPlaceHolder1_txtKeywords" class="formField" /><br />
+            Category<br />
+            <select name="ctl00$ContentPlaceHolder1$ddCategory" id="ctl00_ContentPlaceHolder1_ddCategory" class="formStyleDropDown">
+	<option selected="selected" value="-1">(   All   )</option>
+	<option value="1">Email</option>
+	<option value="2">Uri</option>
+	<option value="3">Numbers</option>
+	<option value="4">Strings</option>
+	<option value="5">Dates and Times</option>
+	<option value="6">Misc</option>
+	<option value="7">Address/Phone</option>
+	<option value="8">Markup/Code</option>
+
+</select><br />
+            Minimum Rating<br />
+            <select name="ctl00$ContentPlaceHolder1$ddMinimumRating" id="ctl00_ContentPlaceHolder1_ddMinimumRating" class="formStyleDropDown">
+	<option selected="selected" value="-1">  ( All )   </option>
+	<option value="5">The Best</option>
+	<option value="4">Above Average</option>
+	<option value="3">Average</option>
+	<option value="2">Below Average</option>
+	<option value="1">Pretty Bad</option>
+
+</select><br />
+            Results per Page<br />
+            <select name="ctl00$ContentPlaceHolder1$ddPageSize" id="ctl00_ContentPlaceHolder1_ddPageSize" class="formStyleDropDown">
+	<option value="10">10</option>
+	<option value="20">20</option>
+	<option value="50">50</option>
+	<option selected="selected" value="100">100</option>
+
+</select><br />
+            <input type="submit" name="ctl00$ContentPlaceHolder1$btnSearch" value="Search" id="ctl00_ContentPlaceHolder1_btnSearch" class="buttonLarge" style="margin-top: 6px;" />
+        </div>
+        <div class="largeRectangleAd">
+            <div class="lqm_ad" lqm_channel="1" lqm_publisher="50" lqm_format="7" lqm_zone="1"
+height="0" width="0"></div><span id="ctl00_ContentPlaceHolder1_Large1"></span>
+        </div>
+    </div>
+    <div class="commonContainerHeader">
+        <h2>Search Results: <span id="ctl00_ContentPlaceHolder1_ResultCountLabel1">4872</span> regular expressions found.</h2>
+    </div>
+	<div class="commonContainerSubHead">
+	    <span id="ctl00_ContentPlaceHolder1_Pager1_PagerPanel1">
+Change page:
+<a id="ctl00_ContentPlaceHolder1_Pager1_StepBackAllHyperLink" alt="&lt;&lt; Step back to beginning" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=1" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_back_all.png" alt="" border="0" /></a><a id="ctl00_ContentPlaceHolder1_Pager1_StepBackOneHyperLink" alt="&lt; Step back one page" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=56" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_back_1.png" alt="" border="0" /></a><a id="ctl00_ContentPlaceHolder1_Pager1_StepForwardOneHyperLink" alt="Step forward one page >" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=58" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_forward_1.png" alt="" border="0" /></a><a id="ctl00_ContentPlaceHolder1_Pager1_StepForwardAllHyperLink" alt="Step forward to last page >>" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=49" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_forward_all.png" alt="" border="0" /></a>
+&nbsp;&nbsp;|
+</span>
+&nbsp;&nbsp; Displaying page
+<span id="ctl00_ContentPlaceHolder1_Pager1_CurrentPageLabel">57</span>
+of
+<span id="ctl00_ContentPlaceHolder1_Pager1_TotalPagesLabel">49</span> pages;
+Items <span id="ctl00_ContentPlaceHolder1_Pager1_FirstItemLabel">5601</span> to <span id="ctl00_ContentPlaceHolder1_Pager1_LastItemLabel">4872</span>
+	</div>
+
+    
+	<div class="commonContainerSubHead">
+	<span id="ctl00_ContentPlaceHolder1_Pager2_PagerPanel1">
+Change page:
+<a id="ctl00_ContentPlaceHolder1_Pager2_StepBackAllHyperLink" alt="&lt;&lt; Step back to beginning" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=1" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_back_all.png" alt="" border="0" /></a><a id="ctl00_ContentPlaceHolder1_Pager2_StepBackOneHyperLink" alt="&lt; Step back one page" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=56" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_back_1.png" alt="" border="0" /></a><a id="ctl00_ContentPlaceHolder1_Pager2_StepForwardOneHyperLink" alt="Step forward one page >" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=58" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_forward_1.png" alt="" border="0" /></a><a id="ctl00_ContentPlaceHolder1_Pager2_StepForwardAllHyperLink" alt="Step forward to last page >>" border="0" href="/Search.aspx?k=&amp;c=-1&amp;m=-1&amp;ps=100&amp;p=49" style="display:inline-block;"><img src="App_Themes/Green/images/arrow_forward_all.png" alt="" border="0" /></a>
+&nbsp;&nbsp;|
+</span>
+&nbsp;&nbsp; Displaying page
+<span id="ctl00_ContentPlaceHolder1_Pager2_CurrentPageLabel">57</span>
+of
+<span id="ctl00_ContentPlaceHolder1_Pager2_TotalPagesLabel">49</span> pages;
+Items <span id="ctl00_ContentPlaceHolder1_Pager2_FirstItemLabel">5601</span> to <span id="ctl00_ContentPlaceHolder1_Pager2_LastItemLabel">4872</span>
+
+	</div>
+	
+
+    
+    
+
+        </div>
+    </div>
+    <div id="copyrightLine">
+        <p>
+            Copyright © 2001-2018, <a href="http://regexadvice.com/">RegexAdvice.com</a>
+            | <a href="http://aspalliance.com/">ASP.NET Tutorials</a></p>
+    </div>
+    
+    </form>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        _uacct = "UA-470225-2";
+        urchinTracker();
+    </script>
+    <!-- Start Quantcast tag -->
+    <script type="text/javascript">
+        _qoptions = {
+            qacct: "p-a3-n3YcLyLJ56"
+        };
+    </script>
+    <script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-a3-n3YcLyLJ56.gif" style="display: none;"
+            border="0" height="1" width="1" alt="Quantcast" />
+    </noscript>
+    <!-- End Quantcast tag -->
+    <script type='text/javascript' language='Javascript' src='http://s1.lqcdn.com/m.min.js?dt=2.3.110104.1'></script>
+</body>
+</html>
