@@ -21,8 +21,7 @@ Our artifact includes the following:
 | Regex analyses: Semantic | Drivers for 5 input generators | Section 7.1 | Collects, improves, and unifies existing input generators | |
 | Regex analyses: Performance | Drivers for 3 super-linear regex detectors | Section 7.2 | Extends existing super-linear regex detectors to partial-match semantics | Builds on the tooling from our FSE'18 paper |
 
-
-In addition to this directory's `README.md`, each sub-tree comes with one or more READMEs describing the software and tests.
+In addition to this directory's `README.md`, each sub-tree comes with one or more READMEs describing its contents.
 
 ## Installation
 
@@ -38,16 +37,16 @@ Otherwise...alas.
 
 ### Container
 
-To facilitate replication, we have published a [containerized version](https://hub.docker.com/r/jamiedavis/daviscoghlanservantlee-fse18-regexartifact/) of this project on hub.docker.com.
+To facilitate replication, we have published a [containerized version](https://hub.docker.com/r/jamiedavis/davismichaelcoghlanservantlee-fse19-regexartifact/) of this project on hub.docker.com.
 The container is based on an Ubuntu 16.04 image so it is fairly large.
   
 For example, you might run:
 
 ```
-docker pull jamiedavis/daviscoghlanservantlee-fse18-regexartifact
-docker run -ti jamiedavis/daviscoghlanservantlee-fse18-regexartifact
+docker pull jamiedavis/davismichaelcoghlanservantlee-fse19-regexartifact
+docker run -ti jamiedavis/davismichaelcoghlanservantlee-fse19-regexartifact
 > vim .env
-# Set ECOSYSTEM_REGEXP_PROJECT_ROOT=/davis-fse18-artifact/EcosystemREDOS-FSE18
+# Set ECOSYSTEM_REGEXP_PROJECT_ROOT=/davis-fse19-artifact/LinguaFranca-FSE19
 > . .env
 > ./full-analysis/analyze-regexp.pl ./full-analysis/test/vuln-email.json
 ```
@@ -96,7 +95,7 @@ Each directory contains its own README for additional details.
 
 ### Style
 
-Most of the scripts in this repository are written in Perl.
+Most of the scripts in this repository are written in Python.
 They tend to write status updates to STDERR and to emit useful output to STDOUT, though the more complex ones use a resultFile instead.
 
 If you have dependencies on other scripts in the repo, require the invoker to define `ECOSYSTEM_REGEXP_PROJECT_ROOT`.
@@ -104,9 +103,12 @@ This environment variable should name the location of your clone of this reposit
 
 ### File formats
 
-This project uses JSON to describe research data.
-Files named `*.json` are generally JavaScript files that contain one JSON object per line.
-This makes it easy to do a line-by-line analysis on the objects in the file, even if the file is large.
+This project uses JSON to describe research data. Files named `*.json` are generally [NDJSON](http://ndjson.org/)-formatted files that contain one JSON object per line.
+
+Why giant flat files?
+- Makes it easy to do a line-by-line streaming analysis on the objects in the file, even if the file is large.
+- Makes it easy to divide work amongst the nodes in a compute cluster.
+- Makes it easy to share data with other researchers.
 
 ## Contact
 
