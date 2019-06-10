@@ -19,6 +19,8 @@ pip install --user -r requirements.txt
 1. Download the `Posts` table from the stackoverflow archive.
 
 ```
+mkdir data
+mkdir raw-data
 wget --no-clobber --output-document=raw-data/stackoverflow.com-Posts.7z https://archive.org/download/stackexchange/stackoverflow.com-Posts.7z
 ```
 
