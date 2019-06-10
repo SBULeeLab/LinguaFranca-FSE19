@@ -76,18 +76,18 @@ Use this to confirm that the code is installed and working. Whether you think it
 | File or Directory/    | Description |
 |:---------------------:|:------------|
 | README.md             | You're in it                                              |
-| PAPER.pdf             | Non-anonymized manuscript we submitted for review. Not camera-ready.                                              |
+| PAPER.pdf             | Non-anonymized manuscript we submitted for review. Not camera-ready. |
 | LICENSE               | Terms of software release                                 |
 | STATUS                | Claims of artifact quality                                |
 | INSTALL               | "Install instructions"                                    |
-| internet-regexes/                | Corpus for Internet Sources, plus extraction tools                                    |
+| internet-regexes/                | Corpus for Internet Sources, plus extraction tools   |
 | production-regexes/              | Corpus for Production Regexes, plus extraction tools |
-| lib/                             | Python libraries -- utility routines, serializers and parsers for types expressed in JSON
-| test-regex-behavior-in-language/ | Drivers for testing regex behavior in each language
-| semantic/                        | Tools for semantic experiments
-| performance/                     | Tools for performance experiments
-| containerized/                   | Dockerfile for building container | - |
-| full-analysis/                   | Run each analysis step on a regex.                        | - |
+| lib/                             | Python libraries -- utility routines, serializers and parsers for types expressed in JSON |
+| test-regex-behavior-in-language/ | Drivers for testing regex behavior in each language |
+| semantic/                        | Tools for semantic experiments     |
+| performance/                     | Tools for performance experiments  |
+| containerized/                   | Dockerfile for building container  |
+| full-analysis/                   | Run each analysis step on a regex. |
 
 Each directory contains its own README for additional details.
 
