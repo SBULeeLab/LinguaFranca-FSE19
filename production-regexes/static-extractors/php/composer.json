@@ -1,0 +1,11 @@
+{
+    "name": "LinguaFranca/PHP-regex-extractor",
+    "description": "Extract regexes from PHP programs",
+    "require": {
+        "nikic/php-parser": "~4.1.0"
+    },
+    "config": {
+        "disable-tls": true,
+        "secure-http": false
+    }
+}

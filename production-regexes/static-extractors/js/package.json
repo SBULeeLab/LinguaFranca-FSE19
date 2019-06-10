@@ -1,0 +1,13 @@
+{
+  "name": "extract-regexps",
+  "version": "1.0.0",
+  "description": "Extract regexps from a JS file",
+  "main": "extract-regexps.js",
+  "dependencies": {
+    "@babel/parser": "^7.4.3",
+    "babel-generator": "^6.26.1",
+    "babel-template": "^6.26.0",
+    "babel-traverse": "^6.26.0"
+  },
+  "author": "James C. Davis"
+}

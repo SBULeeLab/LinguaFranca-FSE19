@@ -1,0 +1,19 @@
+{
+  "name": "transpile-ts2js-tsc",
+  "version": "1.0.0",
+  "description": "Transpile ts to js",
+  "main": "transpile-ts2js-tsc.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "tsc transpile-ts2js-tsc.ts && chmod +x transpile-ts2js-tsc.js",
+    "test": "set -e; for f in `ls test/*.ts`; do ./transpile-ts2js-tsc.js $f; done"
+  },
+  "author": "Jamie Davis <davisjam@vt.edu>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^10.12.10",
+    "typescript": "^3.2.1"
+  }
+}
