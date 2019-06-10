@@ -5,6 +5,12 @@ Tools to:
 2. Count these regexes.
 3. Identify overlap between the regexes from Internet sources and regexes used in practice.
 
+Note: In the paper we report a breakdown by language of origin and by module.
+This requires mapping each regex back to its original module.
+While we have this data, for security reasons we are not disclosing the mapping from regex back to its original module.
+
+However, the provided scripts are sufficient to demonstrate our findings writ broad: developers appear to re-use regexes from Internet sources.
+
 # Sources
 
 | source | directory | description |
@@ -24,32 +30,16 @@ Tools to:
 2. Check if real regexes match those from an internet source.
 
 ```
-# Check npm against the RegExLib and StackOverflow sources
-./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../data/npm/npm-pattern2modules.json --out-file /tmp/out.json 2>/tmp/npm-REL.err
-grep -c 'matches internet source' /tmp/npm-REL.err
-grep -c 'does not match internet source' /tmp/npm-REL.err
-tail -2 /tmp/npm-REL.err | head -1
+# Simple check for intersections between regexlib and the production regexes
+./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../production-regexes/uniq-regexes-8.json > /tmp/check-match-regexlib.log 2>&1
 
-./check-real-regexes-from-internet.py --internet-patterns stackoverflow/data/internetSources-stackoverflow.json --real-patterns ../data/npm/npm-pattern2modules.json --out-file /tmp/out.json 2>/tmp/npm-SO.err
-grep -c 'matches internet source' /tmp/npm-SO.err
-grep -c 'does not match internet source' /tmp/npm-SO.err
-tail -2 /tmp/npm-SO.err | head -1
+# Simple check for intersections between stackoverflow and the production regexes
+./check-real-regexes-from-internet.py --internet-patterns stackoverflow/data/internetSources-stackoverflow.json --real-patterns ../production-regexes/uniq-regexes-8.json > /tmp/check-match-stackoverflow.log 2>&1
 
-# Check pypi against the RegExLib and StackOverflow sources
-./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../data/pypi/pypi-pattern2modules.json --out-file /tmp/out.json 2>/tmp/pypi-REL.err
-grep -c 'matches internet source' /tmp/pypi-REL.err
-grep -c 'does not match internet source' /tmp/pypi-REL.err
-tail -2 /tmp/pypi-REL.err | head -1
-
-./check-real-regexes-from-internet.py --internet-patterns stackoverflow/data/internetSources-stackoverflow.json --real-patterns ../data/pypi/pypi-pattern2modules.json --out-file /tmp/out.json 2>/tmp/pypi-SO.err
-grep -c 'matches internet source' /tmp/pypi-SO.err
-grep -c 'does not match internet source' /tmp/pypi-SO.err
-tail -2 /tmp/pypi-SO.err | head -1
-
-# Test pypi against regexlib with varying writing difficulty thresholds
-for thresh in 0 5 10 20 30 40; do ./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../data/pypi/pypi-pattern2modules.json --out-file /tmp/out.json --writing-difficulty-threshold $thresh 2>/tmp/pypi-REL-thresh$thresh.err; done
+# Check for intersections with varying writing difficulty thresholds
+for thresh in 0 5 10 20 30 40; do ./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../production-regexes/uniq-regexes-8.json --writing-difficulty-threshold $thresh 2>/tmp/check-match-regexlib-thresh$thresh.err; done
 ```
 
 # File format
 
-An Internet source should yield a file of ndjson-formatted libLF.InternetRegexSource objects.
+An Internet source should yield a file of NDJSON-formatted libLF.InternetRegexSource objects.

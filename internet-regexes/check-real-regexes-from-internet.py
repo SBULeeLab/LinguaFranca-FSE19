@@ -39,52 +39,47 @@ def getInternetPatternsDict(internetPatternsStream):
   libLF.log('Read in {} unique internetPatterns'.format(len(internetPatterns.keys())))
   return internetPatterns
 
-def main(internetPatternsFile, realPatternsFile, writingDifficultyThreshold, outFile):
+def main(internetPatternsFile, realPatternsFile, writingDifficultyThreshold):
   with ExitStack() as stack:
     internetPatternsStream = stack.enter_context(open(internetPatternsFile, 'r'))
     realPatternsStream = stack.enter_context(open(realPatternsFile, 'r'))
-    outStream = stack.enter_context(open(outFile, 'w'))
 
     internetPatternsDict = getInternetPatternsDict(internetPatternsStream)
-    uniqueModulesWithInternetRegexSource = set()
+    nRegexesMatchingInternetRegex = 0
 
     for line in realPatternsStream:
       # Skip blank lines
-      if re.match('^\s*$', line):
+      if re.match(r'^\s*$', line):
         continue
 
-      # TODO Python representation of RegexpUsage for the regexes we extract in the future.
-      # For now, load a raw regexp object from ESEC/FSE and check for a match in our dict
-      obj = libLF.fromNDJSON(line)
+      try:
+        regex = libLF.Regex().initFromNDJSON(line)
 
-      # Discard patterns that could be independently derived.
-      if libLF.scorePatternWritingDifficulty(obj['pattern']) < writingDifficultyThreshold:
-        continue
+        # Discard patterns that could be independently derived.
+        if libLF.scorePatternWritingDifficulty(regex.pattern) < writingDifficultyThreshold:
+          continue
 
-      if obj['pattern'] in internetPatternsDict:
-        libLF.log('realPattern /{}/ matches internet source'.format(obj['pattern']))
-        obj['internetSources'] = [ o.toNDJSON() for o in internetPatternsDict[obj['pattern']] ]
-        for module in obj['modules']:
-          uniqueModulesWithInternetRegexSource.add(module)
-      else:
-        libLF.log('realPattern /{}/ does not match internet source'.format(obj['pattern']))
-        obj['internetSources'] = []
-      outStream.write(json.dumps(obj, sort_keys=True) + '\n')
+        if regex.pattern in internetPatternsDict:
+          libLF.log('realPattern /{}/ matches internet source'.format(regex.pattern))
+          nRegexesMatchingInternetRegex += 1
+        else:
+          libLF.log('realPattern /{}/ does not match internet source'.format(obj['pattern']))
+      except:
+        pass
 
-    libLF.log('{} unique modules contained regexes from internet sources:\n{}'.format(len(uniqueModulesWithInternetRegexSource), uniqueModulesWithInternetRegexSource))
+    libLF.log('{} regexes matched internet sources'.format(nRegexesMatchingInternetRegex))
 
 ###############################################
 
 # Parse args
 parser = argparse.ArgumentParser(description='Determine whether regex patterns from source code match an Internet source')
-parser.add_argument('--internet-patterns', '-i', help='Path to Internet regexes file. See internet-regexps/README.md for format.', required=True)
-parser.add_argument('--real-patterns', '-r', help='Path to real regexes file. See ecosystem-regexps/README.md for format.', required=True)
+parser.add_argument('--internet-patterns', '-i', help='Path to Internet regexes file', required=True)
+parser.add_argument('--real-patterns', '-r', help='Path to file of libLF.Regex objects', required=True)
 parser.add_argument('--writing-difficulty-threshold', '-d', help='Only consider patterns >= this writing difficulty. Below this we consider independent derivation possible', type=int, default=0, required=False)
-parser.add_argument('--out-file', '-o', help='Where to write results?', required=True)
 
 args = parser.parse_args()
 
 assert(0 <= args.writing_difficulty_threshold)
 
 # Here we go!
-main(args.internet_patterns, args.real_patterns, args.writing_difficulty_threshold, args.out_file)
+main(args.internet_patterns, args.real_patterns, args.writing_difficulty_threshold)
