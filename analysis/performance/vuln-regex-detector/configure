@@ -1,0 +1,245 @@
+#!/usr/bin/env perl
+# Env. var params:
+#   SKIP_PKG_DEPS=1    Don't try to install packages (sudo-less)
+#                      (You should install any needed packages/binaries from
+#                       source and set your PATH appropriately)
+
+use strict;
+use warnings;
+
+my $SKIP_PKG_DEPS;
+if (defined $ENV{SKIP_PKG_DEPS} and $ENV{SKIP_PKG_DEPS}) {
+  $SKIP_PKG_DEPS = 1;
+} else {
+  $SKIP_PKG_DEPS = 0;
+}
+my $INSTALL_PKG_DEPS = not $SKIP_PKG_DEPS;
+
+if (not defined $ENV{VULN_REGEX_DETECTOR_ROOT}) {
+  die "Error, you must define VULN_REGEX_DETECTOR_ROOT\n";
+}
+
+# Linux or bust
+my $os = $^O;
+if ($os ne "linux") {
+  die "Error, $os is unsupported. Only works on Linux\n";
+}
+
+# Ubuntu or bust
+my $osRelease = `cat /etc/os-release 2>/dev/null`;
+if ($osRelease !~ m/NAME="Ubuntu"/i) {
+  die "Error, only Ubuntu is supported. Your machine is:\n$osRelease\n";
+}
+
+&log("Configuring repo");
+
+if ($INSTALL_PKG_DEPS) {
+  # Install dependencies
+  my @miscPackages_ubuntu = ("zip", "unzip", "make", "git", "wget", "vim");
+  my @rxxr2Packages_ubuntu = ("ocaml");
+  my @wustholzPackages_ubuntu = ("default-jdk");
+  my @shenPackages_ubuntu = ("maven");
+  my @dynamicAnalysisPackages_ubuntu = ("nodejs", "php-cli", "ruby", "cargo", "golang-go");
+  my @requiredPackages_ubuntu = (@miscPackages_ubuntu, @rxxr2Packages_ubuntu, @wustholzPackages_ubuntu, @shenPackages_ubuntu, @dynamicAnalysisPackages_ubuntu);
+  
+  &log("Installing dependencies");
+  &chkcmd("sudo apt-get install -y @requiredPackages_ubuntu");
+}
+else {
+  # I know rxxr2 works on ocaml 4.02.3 since that is the Ubuntu 16 version.
+  # It also works on 4.07.0 (latest release), so let's use that.
+  # Install instructions here: http://caml.inria.fr/pub/distrib/ocaml-4.07/notes/INSTALL
+  # davisjam@sushi-headnode:~/ocaml-4.07.0$ ./configure -prefix $HOME/usr/ # <-- The prefix says 'make install, put stuff in $HOME/usr/bin' for a local install.
+  #   make world.opt
+  #   make install
+  # And add '$HOME/usr/bin' to $PATH.
+  &log("Skipping installation of packages. Hope you did a local install correctly");
+}
+
+# Submodules
+&log("Initializing/updating submodules");
+&chkcmd("git submodule update --init --recursive");
+
+# Detectors
+&log("Configuring detectors");
+&configureDetectors();
+
+# Validators
+&log("Configuring validators");
+&configureValidators();
+
+# npm install my node modules
+&log("Configuring node modules");
+my @nodeModuleDirs = map { "$ENV{VULN_REGEX_DETECTOR_ROOT}/$_" } ("src/extract/src/javascript/", "src/cache/client/", "src/cache/server/");
+for my $dir (@nodeModuleDirs) {
+  chdir $dir or die "Error, chdir failed: $!\n";
+  &chkcmd("npm install");
+  chdir $ENV{VULN_REGEX_DETECTOR_ROOT} or die "Error, chdir failed: $!\n";
+}
+
+&log("Configuration complete");
+exit 0;
+
+####################
+# Configuration steps
+####################
+
+# Backup: https://github.com/davisjam/redos-detector-backup
+sub configureDetectors {
+  &configureRXXR2();
+  &configureWustholz();
+  &configureWeideman();
+  &configureShen();
+
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}" or die "Error, chdir failed: $!\n";
+  return;
+}
+
+sub configureValidators {
+  ## Build validators that need it
+
+  # Rust
+  &log("Building Rust validator");
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/validate/src/rust" or die "Error, chdir failed: $!\n";
+  &chkcmd("make");
+
+  # Go
+  &log("Building Go validator");
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/validate/src/go" or die "Error, chdir failed: $!\n";
+  &chkcmd("make");
+
+  # Java
+  &log("Building Java validator");
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/validate/src/java" or die "Error, chdir failed: $!\n";
+  &chkcmd("mvn clean compile; mvn clean package");
+
+  ## Build validator tests
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/validate/test" or die "Error, chdir failed: $!\n";
+  &chkcmd("./gen-tests.pl");
+
+  ## Reset pwd
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}" or die "Error, chdir failed: $!\n";
+
+  return;
+}
+
+sub configureRXXR2 {
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/detect/src/detectors" or die "Error, chdir failed: $!\n";
+
+  my $dir = "rathnayake-rxxr2";
+  my $file = "$dir/scan.bin";
+
+  if (-d $dir) {
+    &log("rathnayake already installed ($ENV{VULN_REGEX_DETECTOR_ROOT}/src/detect/src/detectors/$dir)");
+  }
+  else {
+    &log("Setting up rxxr2");
+
+    &log("Downloading");
+    &chkcmd("wget http://www.cs.bham.ac.uk/~hxt/research/rxxr2/rxxr2.zip -O rxxr2.zip");
+    &chkcmd("unzip rxxr2.zip"); # Unzips to 'rxxr/'
+
+    &log("Building");
+    &chkcmd("cd rxxr/code; ./build.sh; cd -");
+
+    &log("Cleaning up");
+    &chkcmd("mv rxxr/code/scan.bin /tmp/RXXR2-INSTALL-scan.bin");
+    &chkcmd("rm -rf rxxr/");
+    &chkcmd("mkdir $dir");
+    &chkcmd("mv /tmp/RXXR2-INSTALL-scan.bin $file");
+    &chkcmd("rm rxxr2.zip");
+
+    if (not -f $file) {
+      die "Error, configuring rxxr2 failed: could not find $file\n";
+    }
+
+    &log("Configured rxxr2");
+  }
+
+  return;
+}
+
+sub configureWustholz {
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/detect/src/detectors" or die "Error, chdir failed: $!\n";
+
+  my $dir = "wuestholz-RegexCheck";
+  my $file = "$dir/regexcheck.jar";
+
+  if (-d $dir) {
+    &log("wuestholz already installed ($ENV{VULN_REGEX_DETECTOR_ROOT}/src/detect/src/detectors/$dir)");
+  }
+  else {
+    &log("Setting up wuestholz");
+
+    &log("Downloading");
+    &chkcmd("wget http://www.wuestholz.com/downloads/regexcheck.zip -O regexcheck.zip");
+    &chkcmd("unzip regexcheck.zip");
+
+    &log("Renaming");
+    &chkcmd("mv regexcheck-2016-09-09 $dir");
+    &chkcmd("rm regexcheck.zip");
+
+    if (not -f $file) {
+      die "Error, configuring Wustholz failed: could not find $file\n";
+    }
+
+    &log("Configured wuestholz");
+  }
+
+  return;
+}
+
+sub configureWeideman {
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/detect/src/detectors" or die "Error, chdir failed: $!\n";
+
+  my $dir = "weideman-RegexStaticAnalysis";
+  my $file = "$dir/RegexStaticAnalysis.jar";
+
+  &chkcmd("cd $dir; make exejar; cd -");
+  if (not -f $file) {
+    die "Error, configuring weideman failed: could not find $file\n";
+  }
+
+  &log("Configured weideman");
+
+  return;
+}
+
+sub configureShen {
+  chdir "$ENV{VULN_REGEX_DETECTOR_ROOT}/src/detect/src/detectors" or die "Error, chdir failed: $!\n";
+
+  my $dir = "shen-ReScue";
+  my $file = "$dir/target/ReScue-1.0.jar";
+
+  &chkcmd("cd $dir; mvn clean compile; mvn package; cd -");
+  if (not -f $file) {
+    die "Error, configuring shen failed: could not find $file\n";
+  }
+
+  &log("Configured shen");
+
+  return;
+}
+
+####################
+# Utility
+####################
+
+sub chkcmd {
+  my ($cmd) = @_;
+
+  &log("$cmd");
+  my $out = `$cmd`;
+
+  my $rc = $? >> 8;
+  if ($rc) {
+    die "Error, $cmd gave rc $rc:\n$out\n";
+  }
+
+  return $out;
+}
+
+sub log {
+  my ($msg) = @_;
+  print STDOUT "$msg\n";
+}
