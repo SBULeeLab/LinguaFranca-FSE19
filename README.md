@@ -73,18 +73,6 @@ Use this to confirm that the code is installed and working. Whether you think it
 
 ## Directory structure
 
-The general layout is as follows:
-- Corpuses
-  - `internet-regexes/`, `production-regexes/`
-- Experimental aids
-  - `test-regex-behavior-in-language/`
-- Analysis tools for syntax, semantic, and performance tests
-   - `syntax/`
-   - `semantic/`
-   - `performance/`
-
-Here is a detailed manifest:
-
 | File or Directory/    | Description |
 |:---------------------:|:------------|
 | README.md             | You're in it                                                    |
@@ -92,15 +80,15 @@ Here is a detailed manifest:
 | LICENSE               | Terms of software release                                       |
 | STATUS                | Claims of artifact quality                                      |
 | INSTALL               | "Install instructions"                                          |
+|-----------------------|-----------------------------------------------------------------|
+| containerized/        | Dockerfile for building container                               |
 | configure.sh          | One-stop-shop for configuration                                 |
-| internet-regexes/                | Corpus for Internet Sources, plus extraction tools   |
-| production-regexes/              | Corpus for Production Regexes, plus extraction tools |
-| test-regex-behavior-in-language/ | Drivers for testing regex behavior in each language                     |
-| semantic/                        | Tools for semantic experiments -- input generation and analysis scripts |
-| performance/                     | Tools for performance experiments                                       |
-| containerized/                   | Dockerfile for building container                                       |
-| full-analysis/                   | Run each analysis step on a regex                                       |
-| lib/                             | Python libraries -- utility routines, serializers and parsers for types expressed in JSON |
+|-----------------------|-----------------------------------------------------------------|
+| data/                 | Corpuses (internet and production) and tools to reproduce them  |
+| analysis/             | Experimental analyses (syntax, semantic, performance)           |
+| full-analysis/        | Run each analysis step on a regex                               |
+| lib/                  | Python libraries -- utility routines, serializers and parsers for types expressed in JSON |
+| bin/                  | Symlinks to the tools scattered throughout the tree, easing access from analysis scripts |
 
 Each directory contains its own README with additional details.
 
