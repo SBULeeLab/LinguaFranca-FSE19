@@ -66,13 +66,13 @@ Our analyses work on a set of regexes.
 You can use the tail of the full corpus to see how things go.
 
 ```
-$ tail -10 $ECOSYSTEM_REGEXP_PROJECT_ROOT/data/production-regexes/uniq-regexes-8.json > 10-regexes.json
+tail -10 $ECOSYSTEM_REGEXP_PROJECT_ROOT/data/production-regexes/uniq-regexes-8.json > 10-regexes.json
 ```
 
 #### Syntax
 
 ```
-$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-syntax-portability.py --regex-file 10-regexes.json --out-file 10-syntax.json 2>10-syntax.log
+$ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-syntax-portability.py --regex-file 10-regexes.json --out-file 10-syntax.json 2>10-syntax.log
 ```
 
 This should run quickly.
@@ -108,7 +108,7 @@ The row with the pattern containing the string "avatar" lists 7 of the languages
 The semantics test should be run on the result of the syntax test, since it needs to know the `supportedLangs` of the libLF.Regex objects.
 
 ```
-$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-semantic-portability.py --regex-file 10-syntax.json --out-file 10-semantic.json 2>10-semantic.log
+$ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-semantic-portability.py --regex-file 10-syntax.json --out-file 10-semantic.json 2>10-semantic.log
 ```
 
 This may take a few minutes.
@@ -127,7 +127,7 @@ For demonstration purposes, we have prepared a regex file that has semantic diff
 (cf. the final row of Table 4).
 
 ```
-$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-semantic-portability.py --regex-file demo/semantic-difference-witness-regex.json --out-file demo-semantic.json 2>demo-semantic.log
+$ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-semantic-portability.py --regex-file demo/semantic-difference-witness-regex.json --out-file demo-semantic.json 2>demo-semantic.log
 ```
 
 The log file now ends more enticingly:
@@ -143,7 +143,7 @@ If you examine `demo-semantic.json`, you'll see the inputs that triggered semant
 Run a performance analysis on the `10-regexes.json` file like this:
 
 ```
-$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/test-for-SL-behavior.py --regex-file 10-regexes.json --out-file 10-performance.json --sl-timeout 10 --power-pumps 100000 2>10-performance.log
+$ECOSYSTEM_REGEXP_PROJECT_ROOT/test-for-SL-behavior.py --regex-file 10-regexes.json --out-file 10-performance.json --sl-timeout 10 --power-pumps 100000 2>10-performance.log
 ```
 
 This takes a few minutes parallelized across my 8-core desktop.
