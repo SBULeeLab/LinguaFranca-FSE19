@@ -18,8 +18,8 @@
 
 CXX      := g++
 PYTHON   := python3
-EXT_PATH := build/lib.linux-x86_64-3.4
-EXT_LIB  := egret_ext.cpython-34m.so
+EXT_PATH := build/lib*
+EXT_LIB  := egret_ext*.so
 
 CXXFLAGS := -Wall -I. -g -O0 -fPIC -std=c++11
 LDFLAGS :=
