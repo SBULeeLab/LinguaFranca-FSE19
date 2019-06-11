@@ -1,0 +1,13 @@
+Enhancements:
+- Refactoring for backreferences
+- Refactoring for test string generation: rely on Path more and apply evil
+string generation to each evil element as appropriate, may make TestString
+and the substring mechanism less necessary.
+- Better error messages for checker
+- Add errors for carets and dollars inside loops such (^abc)+
+- Double every punctuation mark.
+- Add a space before and after each punctuation mark (separately).
+- Remove each space (separately).
+- Analyzing "rejected" strings from tool that are actually accepted.
+- Analyze effects from the path traversal algorithm.
+- Group results better
