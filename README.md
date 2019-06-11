@@ -27,7 +27,7 @@ In addition to this directory's `README.md`, each sub-tree comes with one or mor
 
 ### By hand
 
-To install, execute the script `./configure` on an Ubuntu 16.04 machine with root privileges.
+To install, execute the script `./configure.sh` on an Ubuntu 16.04 machine with root privileges.
 This will obtain and install the various dependencies (e.g. OS packages, REDOS detectors) and compile all analysis tools.
 
 The final line of this script is `echo "Configuration complete. I hope everything works!"`.
@@ -47,7 +47,7 @@ docker run -ti jamiedavis/davismichaelcoghlanservantlee-fse19-regexartifact
 > vim .env
 # Set ECOSYSTEM_REGEXP_PROJECT_ROOT=/davis-fse19-artifact/LinguaFranca-FSE19
 > . .env
-> ./full-analysis/analyze-regexp.pl ./full-analysis/test/vuln-email.json
+> # Proceed to use our tools, see some examples below
 ```
 
 ## Use
@@ -62,13 +62,110 @@ See `.env` for examples.
 
 ### Analysis phases
 
-Each phase of the analysis is performed by a separate set of tools.
-See the description of the directory structure below for a mapping from research questions to directories.
+Our analyses work on a set of regexes.
+You can use the tail of the full corpus to see how things go.
 
-### Running all of the phases at once
+```
+$ tail -10 $ECOSYSTEM_REGEXP_PROJECT_ROOT/data/production-regexes/uniq-regexes-8.json > 10-regexes.json
+```
 
-The `full-analysis/analyze-regexp.pl` program runs all of the analysis phases on a list of regexes and prints a summary for each regex.
-Use this to confirm that the code is installed and working. Whether you think it does something interesting or useful is up to you.
+#### Syntax
+
+```
+$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-syntax-portability.py --regex-file 10-regexes.json --out-file 10-syntax.json 2>10-syntax.log
+```
+
+This should run quickly.
+If you examine the tail of `10-syntax.log`, you'll see output like this:
+
+```
+11/06/2019 02:05:13 woody/22034: Generating a quick summary of regex syntax support
+11/06/2019 02:05:13 woody/22034: Number of supporting languages    Number of regexes
+11/06/2019 02:05:13 woody/22034:                              7                    1
+11/06/2019 02:05:13 woody/22034:                              8                    9
+11/06/2019 02:05:13 woody/22034:
+
+
+11/06/2019 02:05:13 woody/22034:        Language Number of supported regexes
+11/06/2019 02:05:13 woody/22034:      javascript                   10
+11/06/2019 02:05:13 woody/22034:            rust                    9
+11/06/2019 02:05:13 woody/22034:             php                   10
+11/06/2019 02:05:13 woody/22034:          python                   10
+11/06/2019 02:05:13 woody/22034:            ruby                   10
+11/06/2019 02:05:13 woody/22034:            perl                   10
+11/06/2019 02:05:13 woody/22034:            java                   10
+11/06/2019 02:05:13 woody/22034:              go                   10
+11/06/2019 02:05:13 woody/22034:
+```
+
+Apparently one regex was unsupported in Rust, while the other 9 regexes were supported in all 8 languages.
+
+If you examine `10-syntax.json`, you'll see enhanced libLF.Regex objects -- they now have the `supportedLangs` member populated.
+The row with the pattern containing the string "avatar" lists 7 of the languages but not Rust, because Rust does not support the escaped forward slash notation as a valid construct.
+
+#### Semantics
+
+The semantics test should be run on the result of the syntax test, since it needs to know the `supportedLangs` of the libLF.Regex objects.
+
+```
+$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-semantic-portability.py --regex-file 10-syntax.json --out-file 10-semantic.json 2>10-semantic.log
+```
+
+This may take a few minutes.
+Once it's done, you can look at the tail of `10-semantic.log`.
+These 10 regexe are fairly dull from a semantic perspective:
+
+```
+  0 (0.00%) of the 10 completed regexes had at least one witness for different behavior
+```
+
+If you examine `10-semantic.json`, you'll see that the libLF.Regex objects have been enhanced in a different way:
+- They have the `nUniqueInputsTested` member set to the number of inputs that were attempted for each regex
+- They have the `semanticDifferenceWitnesses` member set, though since none were found all of those lists are empty
+
+For demonstration purposes, we have prepared a regex file that has semantic difference witnesses.
+(cf. the final row of Table 4).
+
+```
+$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-semantic-portability.py --regex-file demo/semantic-difference-witness-regex.json --out-file demo-semantic.json 2>demo-semantic.log
+```
+
+The log file now ends more enticingly:
+
+```
+  1 (100.00%) of the 1 completed regexes had at least one witness for different behavior
+```
+
+If you examine `demo-semantic.json`, you'll see the inputs that triggered semantic differences, with a breakdown of the distinct behaviors observed and the languages that evinced each behavior.
+
+#### Performance
+
+Run a performance analysis on the `10-regexes.json` file like this:
+
+```
+$ $ECOSYSTEM_REGEXP_PROJECT_ROOT/test-for-SL-behavior.py --regex-file 10-regexes.json --out-file 10-performance.json --sl-timeout 10 --power-pumps 100000 2>10-performance.log
+```
+
+This takes a few minutes parallelized across my 8-core desktop.
+If you're desperate, you can just run it on a 1-regex file instead of the 10-regex file we've been using.
+
+Once complete, take a look at the end of `10-performance.log`. It says:
+
+```
+11/06/2019 01:56:43 woody/20094: Successfully performed SLRegexAnalysis on 10 regexes, 0 exceptions
+11/06/2019 01:56:43 woody/20094: 1 of 10 successful analyses timed out in some language
+11/06/2019 01:56:43 woody/20094: 1 of the regexes had different performance in different languages
+11/06/2019 01:56:43 woody/20094: 0 of the regexes had different performance in the languages they actually appeared in
+```
+
+If you examine `10-performance.json`, you should see enhanced libLF.Regex objects. 
+According to the log, one of these exhibited super-linear behavior
+If you search the `10-performance.json` file for the string '100000": true', you will see that a regex pattern beginning `proxy.*fooo` timed out on an input of 100000 pumps in the following programming languages:
+- javascript
+- php
+- python
+- ruby
+- java
 
 ## Directory structure
 
@@ -96,7 +193,7 @@ Each directory contains its own README with additional details.
 ### Style
 
 Most of the scripts in this repository are written in Python.
-They tend to write status updates to STDERR and to emit useful output to STDOUT, though the more complex ones use a resultFile instead.
+They tend to write status updates to STDERR, and write their output to an NDJSON-formatted --out-file of serialized libLF objects.
 
 If you have dependencies on other scripts in the repo, require the invoker to define `ECOSYSTEM_REGEXP_PROJECT_ROOT`.
 This environment variable should name the location of your clone of this repository.

@@ -260,6 +260,7 @@ class Regex:
     """Returns types of internet sources this regexes appeared in. [source1, ...]"""
     return self.useCount_IStype_to_nPosts.keys()
   
+  # TODO We have our own versions of the testers, no particular need to use vrdPath
   def isSupportedInLanguage(self, lang, vrdPath=DEFAULT_VULN_REGEX_DETECTOR_ROOT):
     """Returns True if regex can be used in lang
     

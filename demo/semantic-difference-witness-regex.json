@@ -1,0 +1,1 @@
+{"pattern": "a{2}?", "supportedLangs": ["ruby", "php", "perl"], "type": "Regex", "useCount_IStype_to_nPosts": {}, "useCount_registry_to_nModules": {"rubygems": 1}}
