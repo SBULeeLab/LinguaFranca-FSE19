@@ -1,0 +1,4 @@
+See instructions in `README.md`.
+
+Basically, run `./configure.sh` on an Ubuntu 16.04 machine.
+You will need root privileges.
