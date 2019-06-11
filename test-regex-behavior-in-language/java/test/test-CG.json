@@ -1,0 +1,1 @@
+{"pattern": "(?<a>a)_(?<b>b)_\\k<a>$", "inputs": ["a_b_a"]}

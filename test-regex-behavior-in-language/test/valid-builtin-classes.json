@@ -1,0 +1,1 @@
+{"pattern": "\\d\\D\\s\\S(\\w\\W)(Style)", "inputs": ["3X \u001e8;Style", "3X 8;Style^I"]}

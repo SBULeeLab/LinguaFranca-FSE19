@@ -1,0 +1,1 @@
+{"pattern": "^(?:filter([ \\n\\r\\t\\f])*:([ \\n\\r\\t\\f])*progid:?DXImageTransform\\.(([a-zA-Z0-9\\.:])+\\(([a-zA-Z0-9=#, \\n\\r\\t'\"])*\\)([ \\n\\r\\t\\f])*)+)", "inputs": ["filter :progidDXImageTransform.kY.8()  3xb.8(m)"]}

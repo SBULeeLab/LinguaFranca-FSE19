@@ -1,0 +1,1 @@
+{"pattern": "abc(a?)\\1", "inputs": ["abcaa", "abc"]}

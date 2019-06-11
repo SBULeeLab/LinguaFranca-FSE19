@@ -1,0 +1,1 @@
+{"pattern": "(ab|a)*?b", "inputs": ["ab"]}

@@ -1,0 +1,1 @@
+{"pattern": "<(rt-.*?-\\d+-\\d+)\\.(\\d+)-\\d+-\\d+\\@\\QRT->Config->Get('Organization')\\E>$", "inputs": ["<rt-ev_il-0-0.0-0-0@QRT->Config->Get'Organization'E>"]}

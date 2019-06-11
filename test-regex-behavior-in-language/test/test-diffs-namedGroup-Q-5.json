@@ -1,0 +1,1 @@
+{"pattern": "(X)(?'foo'.*)(?:Y)", "inputs": ["XEY"]}

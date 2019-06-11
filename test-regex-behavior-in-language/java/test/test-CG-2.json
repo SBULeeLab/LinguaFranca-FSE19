@@ -1,0 +1,1 @@
+{"pattern": "(?<vehicle>LS[578])_(?<instrument>OLI_TIRS|OLI|TIRS|TM|ETM)_(?<type>NBAR)_(?<level>P54)", "inputs": [""]}

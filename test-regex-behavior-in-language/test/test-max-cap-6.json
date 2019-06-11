@@ -1,0 +1,1 @@
+{"pattern": "(.?[^z]$)?", "inputs": ["aaz"]}
