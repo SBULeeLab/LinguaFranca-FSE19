@@ -73,23 +73,36 @@ Use this to confirm that the code is installed and working. Whether you think it
 
 ## Directory structure
 
+The general layout is as follows:
+- Corpuses
+  - `internet-regexes/`, `production-regexes/`
+- Experimental aids
+  - `test-regex-behavior-in-language/`
+- Analysis tools for syntax, semantic, and performance tests
+   - `syntax/`
+   - `semantic/`
+   - `performance/`
+
+Here is a detailed manifest:
+
 | File or Directory/    | Description |
 |:---------------------:|:------------|
-| README.md             | You're in it                                              |
-| PAPER.pdf             | Non-anonymized manuscript we submitted for review. Not camera-ready. |
-| LICENSE               | Terms of software release                                 |
-| STATUS                | Claims of artifact quality                                |
-| INSTALL               | "Install instructions"                                    |
+| README.md             | You're in it                                                    |
+| PAPER.pdf             | Non-anonymized manuscript we submitted for review (not camera-ready) |
+| LICENSE               | Terms of software release                                       |
+| STATUS                | Claims of artifact quality                                      |
+| INSTALL               | "Install instructions"                                          |
+| configure.sh          | One-stop-shop for configuration                                 |
 | internet-regexes/                | Corpus for Internet Sources, plus extraction tools   |
 | production-regexes/              | Corpus for Production Regexes, plus extraction tools |
+| test-regex-behavior-in-language/ | Drivers for testing regex behavior in each language                     |
+| semantic/                        | Tools for semantic experiments -- input generation and analysis scripts |
+| performance/                     | Tools for performance experiments                                       |
+| containerized/                   | Dockerfile for building container                                       |
+| full-analysis/                   | Run each analysis step on a regex                                       |
 | lib/                             | Python libraries -- utility routines, serializers and parsers for types expressed in JSON |
-| test-regex-behavior-in-language/ | Drivers for testing regex behavior in each language |
-| semantic/                        | Tools for semantic experiments     |
-| performance/                     | Tools for performance experiments  |
-| containerized/                   | Dockerfile for building container  |
-| full-analysis/                   | Run each analysis step on a regex. |
 
-Each directory contains its own README for additional details.
+Each directory contains its own README with additional details.
 
 ## Style and file formats
 
@@ -113,4 +126,3 @@ Why giant flat files?
 ## Contact
 
 Contact J.C. Davis at davisjam@vt.edu with any questions.
-
