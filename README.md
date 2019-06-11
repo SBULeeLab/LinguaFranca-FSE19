@@ -36,6 +36,12 @@ Otherwise...alas.
 
 ### Container
 
+!!!!!!!!!!!!!!
+!Not yet done!
+!!!!!!!!!!!!!!
+
+(However, see containerized/Dockerfile -- this may work?)
+
 To facilitate replication, we have published a [containerized version](https://hub.docker.com/r/jamiedavis/davismichaelcoghlanservantlee-fse19-regexartifact/) of this project on hub.docker.com.
 The container is based on an Ubuntu 16.04 image so it is fairly large.
   
