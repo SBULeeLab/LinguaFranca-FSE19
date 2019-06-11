@@ -113,7 +113,7 @@ $ECOSYSTEM_REGEXP_PROJECT_ROOT/bin/test-for-semantic-portability.py --regex-file
 
 This may take a few minutes.
 Once it's done, you can look at the tail of `10-semantic.log`.
-These 10 regexe are fairly dull from a semantic perspective:
+These 10 regexes are fairly dull from a semantic perspective:
 
 ```
   0 (0.00%) of the 10 completed regexes had at least one witness for different behavior
