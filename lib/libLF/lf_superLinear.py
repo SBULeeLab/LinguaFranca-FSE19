@@ -223,7 +223,7 @@ class SLRegexAnalysis:
   """
 
   DEFAULT_VULN_REGEX_DETECTOR_ROOT = \
-    os.path.join(os.environ['ECOSYSTEM_REGEXP_PROJECT_ROOT'], 'vuln-regex-detector')
+    os.path.join(os.environ['ECOSYSTEM_REGEXP_PROJECT_ROOT'], 'analysis', 'performance', 'vuln-regex-detector')
   
   MATCH_TIMEOUT_SEC = 5
 

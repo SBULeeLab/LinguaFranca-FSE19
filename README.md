@@ -28,8 +28,7 @@ In addition to this directory's `README.md`, each sub-tree comes with one or mor
 ### By hand
 
 To install, execute the script `./configure` on an Ubuntu 16.04 machine with root privileges.
-This will obtain and install the various dependencies (OS packages, REDOS detectors, npm modules, and pypi modules).
-It will also initialize submodules.
+This will obtain and install the various dependencies (e.g. OS packages, REDOS detectors) and compile all analysis tools.
 
 The final line of this script is `echo "Configuration complete. I hope everything works!"`.
 If you see this printed to the console, great!
@@ -57,7 +56,7 @@ docker run -ti jamiedavis/davismichaelcoghlanservantlee-fse19-regexartifact
 
 Export the following environment variables to ensure the tools know how to find each other.
 - `ECOSYSTEM_REGEXP_PROJECT_ROOT`
-- `VULN_REGEX_DETECTOR_ROOT` (submodule, set it to `ECOSYSTEM_REGEXP_PROJECT_ROOT/vuln-regex-detector`)
+- `VULN_REGEX_DETECTOR_ROOT` (dependency, set it to `ECOSYSTEM_REGEXP_PROJECT_ROOT/analysis/performance/vuln-regex-detector`)
 
 See `.env` for examples.
 
