@@ -231,6 +231,7 @@ If you search the `10-performance.json` file for the string '100000": true', you
 | full-analysis/        | Run each analysis step on a regex                               |
 | lib/                  | Python libraries -- utility routines, serializers and parsers for types expressed in JSON |
 | bin/                  | Symlinks to the tools scattered throughout the tree, easing access from analysis scripts |
+| regex-engine-bugs/    | README with links to the bugs we opened against regex engines or documentation |
 
 Each directory contains its own README with additional details.
 
