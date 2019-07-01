@@ -16,6 +16,8 @@ import os
 import argparse
 import re
 
+VERBOSE = False
+
 # input: readable file stream
 # output: dictionary mapping key 'pattern' to a list of the InternetRegexSources that define this pattern
 def getInternetPatternsDict(internetPatternsStream):
@@ -27,9 +29,7 @@ def getInternetPatternsDict(internetPatternsStream):
     if re.match('^\s*$', line):
       continue
 
-    libLF.log('Handling line <{}>'.format(line))
     source = libLF.InternetRegexSource.factory(line)
-    libLF.log('Got InternetSource: {}'.format(source.toNDJSON()))
 
     for pattern in source.patterns:
       if pattern in internetPatterns:
@@ -47,6 +47,8 @@ def main(internetPatternsFile, realPatternsFile, writingDifficultyThreshold):
     internetPatternsDict = getInternetPatternsDict(internetPatternsStream)
     nRegexesMatchingInternetRegex = 0
 
+    nRegexes = 0
+    nRealRegexesAtLeastXDifficult = 0
     for line in realPatternsStream:
       # Skip blank lines
       if re.match(r'^\s*$', line):
@@ -54,20 +56,31 @@ def main(internetPatternsFile, realPatternsFile, writingDifficultyThreshold):
 
       try:
         regex = libLF.Regex().initFromNDJSON(line)
+        nRegexes += 1
 
         # Discard patterns that could be independently derived.
         if libLF.scorePatternWritingDifficulty(regex.pattern) < writingDifficultyThreshold:
           continue
+        nRealRegexesAtLeastXDifficult += 1
 
         if regex.pattern in internetPatternsDict:
           libLF.log('realPattern /{}/ matches internet source'.format(regex.pattern))
           nRegexesMatchingInternetRegex += 1
         else:
-          libLF.log('realPattern /{}/ does not match internet source'.format(obj['pattern']))
-      except:
+          if VERBOSE:
+            libLF.log('realPattern /{}/ does not match internet source'.format(regex.pattern))
+      except Exception as e:
+        libLF.log("Exception?: {}".format(e))
         pass
 
-    libLF.log('{} regexes matched internet sources'.format(nRegexesMatchingInternetRegex))
+    nInternetRegexesAtLeastXDifficult = 0
+    for pat in internetPatternsDict:
+      if libLF.scorePatternWritingDifficulty(pat) < writingDifficultyThreshold:
+        continue
+      nInternetRegexesAtLeastXDifficult += 1
+
+    # Print summary
+    print('{}/{} real regexes matched any of the {} internet regexes (among the {} real regexes and {} internet regexes at least {} difficult)'.format(nRegexesMatchingInternetRegex, nRegexes, len(internetPatternsDict), nRealRegexesAtLeastXDifficult, nInternetRegexesAtLeastXDifficult, writingDifficultyThreshold))
 
 ###############################################
 

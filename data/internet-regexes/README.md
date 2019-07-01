@@ -31,14 +31,16 @@ However, the provided scripts are sufficient to demonstrate our findings writ br
 
 ```
 # Simple check for intersections between regexlib and the production regexes
-./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../production-regexes/uniq-regexes-8.json > /tmp/check-match-regexlib.log 2>&1
+./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../production-regexes/uniq-regexes-8.json 2>/tmp/check-match-regexlib.log
 
 # Simple check for intersections between stackoverflow and the production regexes
-./check-real-regexes-from-internet.py --internet-patterns stackoverflow/data/internetSources-stackoverflow.json --real-patterns ../production-regexes/uniq-regexes-8.json > /tmp/check-match-stackoverflow.log 2>&1
+./check-real-regexes-from-internet.py --internet-patterns stackoverflow/data/internetSources-stackoverflow.json --real-patterns ../production-regexes/uniq-regexes-8.json 2>/tmp/check-match-stackoverflow.log
 
 # Check for intersections with varying writing difficulty thresholds
-for thresh in 0 5 10 20 30 40; do ./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../production-regexes/uniq-regexes-8.json --writing-difficulty-threshold $thresh 2>/tmp/check-match-regexlib-thresh$thresh.err; done
+for thresh in 0 5 10 20 30 40; do ./check-real-regexes-from-internet.py --internet-patterns regexlib/data/internetSources-regExLib.json --real-patterns ../production-regexes/uniq-regexes-8.json --writing-difficulty-threshold $thresh 2>/tmp/check-match-regexlib-thresh$thresh.log; done
 ```
+
+This gives a sense of what the data underlying Figure 4 (RQ5) looks like.
 
 # File format
 
