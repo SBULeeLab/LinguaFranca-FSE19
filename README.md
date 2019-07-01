@@ -2,7 +2,7 @@
 
 # Lingua Franca
 
-Welcome to the ESEC/FSE'19 artifact for the ESEC/FSE paper *"Why Aren’t Regular Expressions a Lingua Franca? An Empirical Study on the Re-use and Portability of Regular Expressions"*, by J.C. Davis, L.G. Michael IV, C.A Coghlan, F. Servant, and D. Lee, all of Virginia Tech.
+Welcome to the ESEC/FSE'19 artifact for the ESEC/FSE paper [*"Why Aren’t Regular Expressions a Lingua Franca? An Empirical Study on the Re-use and Portability of Regular Expressions"*](http://people.cs.vt.edu/~davisjam/downloads/publications/DavisMichaelCoghlanServantLee-LinguaFranca-ESECFSE19.pdf), by J.C. Davis, L.G. Michael IV, C.A Coghlan, F. Servant, and D. Lee, all of Virginia Tech.
 
 This paper describes our study into regex portability practices and problems. In this empirical work, we:
 - surveyed 158 professional software developers about their regex beliefs and re-use practices
